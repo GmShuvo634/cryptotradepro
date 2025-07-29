@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Background Colors */
+    --color-background: #0F1114; /* true-dark */
+    --color-foreground: #FFFFFF; /* white */
+    --color-surface: #252830; /* elevated-surface */
+    --color-card: #252830; /* elevated-surface */
+    --color-card-foreground: #FFFFFF; /* white */
+    --color-popover: #252830; /* elevated-surface */
+    --color-popover-foreground: #FFFFFF; /* white */
+    --color-muted: #1A1D29; /* deep-charcoal */
+    --color-muted-foreground: #9CA3AF; /* balanced-gray */
+    
+    /* Primary Brand Colors */
+    --color-primary: #0066FF; /* trust-blue */
+    --color-primary-foreground: #FFFFFF; /* white */
+    --color-secondary: #1A1D29; /* deep-charcoal */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #00D4AA; /* vibrant-teal */
+    --color-accent-foreground: #0F1114; /* true-dark */
+    
+    /* Status Colors */
+    --color-success: #10B981; /* financial-green */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F59E0B; /* attention-amber */
+    --color-warning-foreground: #0F1114; /* true-dark */
+    --color-error: #EF4444; /* clear-red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #EF4444; /* clear-red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Form Elements */
+    --color-border: rgba(255, 255, 255, 0.1); /* subtle-white-10 */
+    --color-input: #252830; /* elevated-surface */
+    --color-ring: #0066FF; /* trust-blue */
+    
+    /* Text Colors */
+    --color-text-primary: #FFFFFF; /* white */
+    --color-text-secondary: #9CA3AF; /* balanced-gray */
+    
+    /* Shadows */
+    --shadow-elevation: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Typography Base Styles */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  body, p, span, div {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: var(--color-text-primary);
+  }
+  
+  .font-mono, code, pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+  
+  /* Trading-specific utility classes */
+  .trading-panel {
+    @apply bg-surface border border-border rounded-lg shadow-lg;
+  }
+  
+  .price-positive {
+    @apply text-success;
+  }
+  
+  .price-negative {
+    @apply text-error;
+  }
+  
+  .market-data {
+    @apply font-mono text-sm;
+  }
+}
+
+@layer components {
+  /* Navigation Components */
+.nav-item  {
+    @apply flex items-center px-4 py-3 text-sm font-medium text-text-secondary hover:text-text-primary rounded-lg transition-colors duration-200;
+  }
+.nav-item.active  {
+    @apply text-text-primary border-l-2 border-primary;
+  }
+  
+  /* Trading Interface Components */
+  .trading-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ring;
+  }
+.trading-button-buy  {
+    @apply bg-success text-success-foreground;
+  }
+.trading-button-sell  {
+    @apply bg-error text-error-foreground;
+  }
+  
+  /* Data Display Components */
+  .data-card {
+    @apply bg-card border border-border rounded-lg p-4 shadow-sm;
+  }
+  
+  .metric-value {
+    @apply font-mono text-lg font-semibold;
+  }
+  
+  .metric-label {
+    @apply text-sm text-text-secondary;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  
+  .animate-price-update {
+    animation: price-update 200ms ease-out;
+  }
+  
+  @keyframes price-update {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Hover state utilities */
+  .hover-lift {
+    @apply transition-transform duration-150 hover:transform hover:-translate-y-0.5;
+  }
+  
+  /* Focus utilities for trading interfaces */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+  }
+}
